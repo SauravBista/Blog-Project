@@ -1,95 +1,130 @@
-# Flask Blog Application
+Flask Blog Project
 
-A simple blog application built using Flask, Flask-Bootstrap, Flask-SQLAlchemy, Flask-WTF, and Flask-CKEditor. This application allows users to create, edit, delete, and view blog posts with rich text content.
+This is a Flask-based blog project where users can register, log in, create posts, comment on posts, and manage content. The project uses several Flask extensions like Flask-Bootstrap, Flask-CKEditor, Flask-Login, and more.
+Table of Contents
 
-## Features
+    Features
+    Installation
+    Usage
+    File Structure
+    Database Models
+    Routes
+    Admin Only Features
+    Contributing
+    License
 
-- **View All Posts**: Display a list of all blog posts on the homepage.
-- **View Single Post**: Read individual blog posts.
-- **Create New Post**: Add new blog posts with a title, subtitle, author, image URL, and rich text content.
-- **Edit Post**: Modify existing blog posts.
-- **Delete Post**: Remove blog posts from the application.
+Features
 
-## Technologies Used
+    User registration and login with secure password hashing.
+    Blog posts management: create, edit, and delete posts.
+    Commenting system for authenticated users.
+    Gravatar integration for user avatars.
+    Admin-only routes for post management.
+    Error handling and custom error pages.
 
-- **Flask**: A lightweight WSGI web application framework.
-- **Flask-Bootstrap**: Integrates Bootstrap 5 with Flask.
-- **Flask-SQLAlchemy**: Adds SQLAlchemy support to Flask.
-- **Flask-WTF**: Provides integration with WTForms for form handling.
-- **Flask-CKEditor**: Adds CKEditor support for rich text editing.
-- **SQLite**: Lightweight database used for storing blog posts.
+Installation
 
-## Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/yourusername/your-repository.git
-   cd your-repository
-
-    Create and activate a virtual environment:
+    Clone the repository:
 
     bash
 
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+git clone https://github.com/yourusername/flask-blog.git
+cd flask-blog
 
-Install the required dependencies:
+Create a virtual environment:
+
+python -m venv venv
+
+Activate the virtual environment:
+
+On Windows:
+
+venv\Scripts\activate
+
+On MacOS/Linux:
 
 bash
+
+source venv/bin/activate
+
+Install the required packages:
 
 pip install -r requirements.txt
 
-Create the database:
-
-bash
+Set up the database:
 
 python
+
+flask shell
 >>> from app import db
 >>> db.create_all()
 >>> exit()
 
 Run the application:
 
-bash
+arduino
 
-    python app.py
+    flask run
 
-    The application will start on http://localhost:5003.
+Usage
 
-Configuration
+    Access the application in your web browser at http://localhost:5000/.
+    Register a new user, or log in with an existing user account.
+    Create, view, and comment on blog posts.
+    Admin users can create, edit, and delete posts.
 
-    SECRET_KEY: Set to '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'. Change this to a secure key in a production environment.
-    SQLALCHEMY_DATABASE_URI: Points to an SQLite database file posts.db.
+File Structure
+
+graphql
+
+flask-blog/
+├── app.py                  # Main application file
+├── forms.py                # Forms for user registration, login, post creation, etc.
+├── templates/              # HTML templates for the views
+│   ├── about.html
+│   ├── contact.html
+│   ├── error.html
+│   ├── index.html
+│   ├── login.html
+│   ├── make-post.html
+│   ├── post.html
+│   ├── register.html
+├── static/
+│   ├── css/                # CSS files for styling
+│   └── img/                # Image files
+├── requirements.txt        # List of dependencies
+└── README.md               # Project documentation
+
+Database Models
+
+    User: Stores user information, including name, email, and hashed password. Users can have multiple posts and comments.
+    BlogPost: Stores blog post details, including title, subtitle, body, image URL, and author.
+    Comment: Stores comments associated with specific blog posts and users.
 
 Routes
 
-    / - Displays all blog posts.
-    /post/<int:post_id> - Displays a single blog post.
-    /about - About page.
-    /contact - Contact page.
-    /new_post - Form to create a new blog post.
-    /edit/<int:post_id> - Form to edit an existing blog post.
-    /delete/<int:post_id> - Delete a blog post.
+    /: Display all blog posts.
+    /register: Register a new user.
+    /login: Log in an existing user.
+    /logout: Log out the current user.
+    /new-post: Create a new blog post (Admin only).
+    /edit-post/<int:post_id>: Edit an existing blog post (Admin only).
+    /delete/<int:post_id>: Delete a blog post (Admin only).
+    /post/<int:post_id>: View a specific blog post and add comments.
+    /about: About page.
+    /contact: Contact page.
 
-Form Handling
+Admin Only Features
 
-    NewPost Form: Used for creating and editing blog posts. Includes fields for title, subtitle, author, image URL, and body.
+The following routes are restricted to admin users (user ID = 1):
 
+    Creating new posts
+    Editing existing posts
+    Deleting posts
+
+Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-Acknowledgments
-
-    Flask Documentation
-    Flask-Bootstrap Documentation
-    Flask-SQLAlchemy Documentation
-    Flask-WTF Documentation
-    Flask-CKEditor Documentation
-
-Feel free to contribute to this project by creating issues or submitting pull requests.
-
-arduino
-
-
-You can replace placeholders like `https://github.com/yourusername/your-repository.git` with 
+This project is licensed under the MIT License. See the LICENSE file for details.
