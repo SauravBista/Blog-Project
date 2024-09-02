@@ -13,7 +13,10 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from functools import wraps
 from flask import abort
 from flask_gravatar import Gravatar
+from dotenv import load_dotenv
 import os
+
+load_dotenv() 
 
 def admin_only(f):
     @wraps(f)
