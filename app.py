@@ -25,7 +25,7 @@ def admin_only(f):
 
 login_manager = LoginManager()
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 ckeditor = CKEditor(app)
 Bootstrap5(app)
@@ -42,7 +42,7 @@ def forbidden_error(error):
 
 # CONNECT TO DB
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db")
 db = SQLAlchemy()
 db.init_app(app)
 
